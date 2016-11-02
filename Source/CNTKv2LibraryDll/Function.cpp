@@ -1341,7 +1341,7 @@ namespace CNTK
 
             // For constants, migrate the valueMatrix to the right device if needed
             if (variable.IsConstant() && (valueMatrix->GetDeviceId() != network->GetDeviceId()))
-                valueMatrix->TransferFromDeviceToDevice(valueMatrix->GetDeviceId(), network->GetDeviceId(), /*isBeingMoved = */ true, /*emptyTransfer =*/ false, /*updatePreferredDevice =*/ true);
+                value->ChangeDevice(AsDeviceDescriptor(network->GetDeviceId()));
 
             computationNodePtr->Value() = valueMatrix->AsReference();
         }
